@@ -37,6 +37,7 @@ public class PowerOutageDAO {
 		return nercList;
 	}
 
+	@SuppressWarnings("unused")
 	public List<PowerOutages> getPOList(Nerc N) {
 		
 		String sql = "SELECT date_event_began AS begin,date_event_finished AS finished,customers_affected AS customers\r\n"
@@ -72,8 +73,12 @@ public class PowerOutageDAO {
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
-
-		return POList;
+		
+		if (POList!=null && !(POList.isEmpty())) {
+			return POList;
+		}
+		
+		return null;
 	}
 	
 

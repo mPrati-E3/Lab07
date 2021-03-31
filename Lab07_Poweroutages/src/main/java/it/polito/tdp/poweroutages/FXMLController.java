@@ -65,15 +65,15 @@ public class FXMLController {
 	private void Stampante(List<PowerOutages> L) {
     	
     	for (PowerOutages po : L) {
-    		txtStampa.appendText(po.getYear()+" ");
-    		txtStampa.appendText(po.getBegin()+" ");
-    		txtStampa.appendText(po.getFinished()+" ");
+    		txtStampa.appendText(po.getYear()+" - ");
+    		txtStampa.appendText(po.getBegin()+"  --->  ");
+    		txtStampa.appendText(po.getFinished()+"  >>> Costumers: ");
     		txtStampa.appendText(po.getCustomers()+"\n");
     	}
     	
     }
 
-    @FXML
+	@FXML
     void doWCA(ActionEvent event) {
     	
     	txtStampa.clear();
@@ -96,7 +96,7 @@ public class FXMLController {
     	
     	List<PowerOutages> PO = this.model.faiWCA(N,Y,H);
     	
-    	if (PO!=null) {
+    	if (PO!=null && !(PO.isEmpty())) {
     		this.Stampante(PO);
     	} else {
     		txtStampa.appendText("No result found \n");
