@@ -4,10 +4,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
 import it.polito.tdp.poweroutages.model.Nerc;
+import it.polito.tdp.poweroutages.model.PowerOutages;
 
 public class PowerOutageDAO {
 	
@@ -33,6 +35,45 @@ public class PowerOutageDAO {
 		}
 
 		return nercList;
+	}
+
+	public List<PowerOutages> getPOList(Nerc N) {
+		
+		String sql = "SELECT date_event_began AS begin,date_event_finished AS finished,customers_affected AS customers\r\n"
+				+ "FROM poweroutages\r\n"
+				+ "INNER JOIN nerc\r\n"
+				+ "ON nerc.id=poweroutages.nerc_id\r\n"
+				+ "WHERE nerc.id=?";
+		
+		List<PowerOutages> POList = new ArrayList<>();
+
+		try {
+			
+			Connection conn = ConnectDB.getConnection();
+			PreparedStatement st = conn.prepareStatement(sql);
+			
+			st.setInt(1, N.getId());
+			
+			ResultSet res = st.executeQuery();
+
+			while (res.next()) {
+				
+				Timestamp b = res.getTimestamp("begin");
+				Timestamp f = res.getTimestamp("finished");
+				int c = res.getInt("customers");
+				
+				PowerOutages p = new PowerOutages(0,b,f,c);
+				
+				POList.add(p);
+			}
+
+			conn.close();
+
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+
+		return POList;
 	}
 	
 

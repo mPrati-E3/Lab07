@@ -1,30 +1,31 @@
 package it.polito.tdp.poweroutages.model;
 
-import java.time.LocalDate;
+import java.sql.Timestamp;
+import java.util.Date;
 
 public class PowerOutages {
 	
-	private int years;
-	private LocalDate begin;
-	private LocalDate finished;
+	private int year;
+	private Date begin;
+	private Date finished;
 	private int customers;
 	
-	public int getYears() {
-		return years;
+	public int getYear() {
+		return year;
 	}
-	public void setYears(int years) {
-		this.years = years;
+	public void setYear(int year) {
+		this.year = year;
 	}
-	public LocalDate getBegin() {
+	public Date getBegin() {
 		return begin;
 	}
-	public void setBegin(LocalDate begin) {
+	public void setBegin(Timestamp begin) {
 		this.begin = begin;
 	}
-	public LocalDate getFinished() {
+	public Date getFinished() {
 		return finished;
 	}
-	public void setFinished(LocalDate finished) {
+	public void setFinished(Timestamp finished) {
 		this.finished = finished;
 	}
 	public int getCustomers() {
@@ -34,11 +35,11 @@ public class PowerOutages {
 		this.customers = customers;
 	}
 	
-	public PowerOutages(int years, LocalDate begin, LocalDate finished, int customers) {
+	public PowerOutages(int year, Date b, Date f, int customers) {
 		super();
-		this.years = years;
-		this.begin = begin;
-		this.finished = finished;
+		this.year = year;
+		this.begin = b;
+		this.finished = f;
 		this.customers = customers;
 	}
 	

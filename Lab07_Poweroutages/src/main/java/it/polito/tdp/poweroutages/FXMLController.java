@@ -1,7 +1,7 @@
 package it.polito.tdp.poweroutages;
 
 import java.net.URL;
-import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -51,10 +51,10 @@ public class FXMLController {
     private TableColumn<PowerOutages, Integer> colYear;
     
     @FXML
-    private TableColumn<PowerOutages, LocalDate> colBegin;
+    private TableColumn<PowerOutages, Date> colBegin;
 
     @FXML
-    private TableColumn<PowerOutages, LocalDate> colFinished;
+    private TableColumn<PowerOutages, Date> colFinished;
 
     @FXML
     private TableColumn<PowerOutages, Integer> colCustomers;
@@ -62,7 +62,14 @@ public class FXMLController {
     @FXML
     private ImageView imgMap;
     
-    private void Stampante(List<PowerOutages> L) {
+	private void Stampante(List<PowerOutages> L) {
+    	
+    	for (PowerOutages po : L) {
+    		txtStampa.appendText(po.getYear()+" ");
+    		txtStampa.appendText(po.getBegin()+" ");
+    		txtStampa.appendText(po.getFinished()+" ");
+    		txtStampa.appendText(po.getCustomers()+"\n");
+    	}
     	
     }
 
@@ -87,7 +94,13 @@ public class FXMLController {
     		return;
     	}
     	
-    	this.Stampante(this.model.faiWCA(N,Y,H));
+    	List<PowerOutages> PO = this.model.faiWCA(N,Y,H);
+    	
+    	if (PO!=null) {
+    		this.Stampante(PO);
+    	} else {
+    		txtStampa.appendText("No result found \n");
+    	}
 
     }
 
@@ -98,11 +111,6 @@ public class FXMLController {
         assert txtHours != null : "fx:id=\"txtHours\" was not injected: check your FXML file 'Scene.fxml'.";
         assert btnWCA != null : "fx:id=\"btnWCA\" was not injected: check your FXML file 'Scene.fxml'.";
         assert txtStampa != null : "fx:id=\"txtStampa\" was not injected: check your FXML file 'Scene.fxml'.";
-        assert tblStampa != null : "fx:id=\"tblStampa\" was not injected: check your FXML file 'Scene.fxml'.";
-        assert colYear != null : "fx:id=\"colYear\" was not injected: check your FXML file 'Scene.fxml'.";
-        assert colBegin != null : "fx:id=\"colBegin\" was not injected: check your FXML file 'Scene.fxml'.";
-        assert colFinished != null : "fx:id=\"colFinished\" was not injected: check your FXML file 'Scene.fxml'.";
-        assert colCustomers != null : "fx:id=\"colCustomers\" was not injected: check your FXML file 'Scene.fxml'.";
         assert imgMap != null : "fx:id=\"imgMap\" was not injected: check your FXML file 'Scene.fxml'.";
         
         imgMap.setImage(new Image("NERC-map.png"));
