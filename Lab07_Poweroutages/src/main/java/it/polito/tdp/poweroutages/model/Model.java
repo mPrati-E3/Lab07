@@ -22,7 +22,7 @@ public class Model {
 		return podao.getPOList(N);
 	}
 
-	@SuppressWarnings({ "deprecation", "null" })
+	@SuppressWarnings({ "deprecation" })
 	public List<PowerOutages> faiWCA(Nerc n, int y, int h) {
 		
 		List<PowerOutages> PO = this.getPOList(n);
@@ -36,14 +36,21 @@ public class Model {
 			DF.setYear(y);
 		
 			for (PowerOutages po : PO) {
-				po.setYear(po.getBegin().getYear()+1900);
+				po.setYear(po.getFinished().getYear()+1900);
 			}
+						
+			
 		
 			for (int i=0; i<PO.size(); i++) {
-				if (PO.get(i).getYear() < y) {
+				
+				if ((PO.get(i).getYear() <= y) &&
+						((PO.get(i).getFinished().getTime()-PO.get(i).getBegin().getTime()) <= h*3600000)) {
 					PBOX.add(PO.get(i));
 				}
+				
 			}
+			
+			
 		
 		}
 		
