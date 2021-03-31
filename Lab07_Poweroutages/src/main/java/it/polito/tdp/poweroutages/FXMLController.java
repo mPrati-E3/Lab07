@@ -2,6 +2,7 @@ package it.polito.tdp.poweroutages;
 
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import it.polito.tdp.poweroutages.model.Model;
@@ -60,9 +61,33 @@ public class FXMLController {
     
     @FXML
     private ImageView imgMap;
+    
+    private void Stampante(List<PowerOutages> L) {
+    	
+    }
 
     @FXML
     void doWCA(ActionEvent event) {
+    	
+    	txtStampa.clear();
+    	
+    	Nerc N = dropNERC.getValue();
+    	if (N==null) {
+    		txtStampa.appendText("Choose a NERC! \n");
+    		return;
+    	}
+    	
+    	int Y=0;
+    	int H=0;
+    	try {
+    		Y = Integer.parseInt(txtYEARS.getText());
+    		H = Integer.parseInt(txtHours.getText());
+    	} catch (NumberFormatException e) {
+    		txtStampa.appendText("Years and hours must be numeric! \n");
+    		return;
+    	}
+    	
+    	this.Stampante(this.model.faiWCA(N,Y,H));
 
     }
 
@@ -85,5 +110,12 @@ public class FXMLController {
     
     public void setModel (Model m) {
     	this.model=m;
+    	List<Nerc> N = this.model.getNercList();
+    	
+    	for (Nerc n : N) {
+    		dropNERC.getItems().add(n);
+    	}
+    	
+    	dropNERC.setValue(N.get(0));
     }
 }

@@ -16,4 +16,9 @@ public class Model {
 		return podao.getNercList();
 	}
 
+	public List<PowerOutages> faiWCA(Nerc n, int y, int h) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
