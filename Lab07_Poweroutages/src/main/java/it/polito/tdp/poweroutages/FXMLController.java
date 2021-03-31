@@ -62,6 +62,7 @@ public class FXMLController {
     @FXML
     private ImageView imgMap;
     
+    //funzione di stampa, prende un a lista e la mette nella text area, non fa altro
 	private void Stampante(List<PowerOutages> L) {
     	
     	for (PowerOutages po : L) {
@@ -73,6 +74,7 @@ public class FXMLController {
     	
     }
 
+	//quando premo il pulsante, controllo le varie text field e drop poi chiamo il metodo operativo del modello
 	@FXML
     void doWCA(ActionEvent event) {
     	
@@ -113,11 +115,14 @@ public class FXMLController {
         assert txtStampa != null : "fx:id=\"txtStampa\" was not injected: check your FXML file 'Scene.fxml'.";
         assert imgMap != null : "fx:id=\"imgMap\" was not injected: check your FXML file 'Scene.fxml'.";
         
+        //carico l'immagine della mappa
         imgMap.setImage(new Image("NERC-map.png"));
     }
     
     public void setModel (Model m) {
     	this.model=m;
+    	
+    	//metto nel drop i valori NERC, devo farlo qua perchè prima il modello non esiste
     	List<Nerc> N = this.model.getNercList();
     	
     	for (Nerc n : N) {

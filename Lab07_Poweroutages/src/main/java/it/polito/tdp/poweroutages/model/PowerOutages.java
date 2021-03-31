@@ -3,6 +3,7 @@ package it.polito.tdp.poweroutages.model;
 import java.sql.Timestamp;
 import java.util.Date;
 
+//javabean per rappresentare i poweroutages
 public class PowerOutages {
 	
 	private int year;

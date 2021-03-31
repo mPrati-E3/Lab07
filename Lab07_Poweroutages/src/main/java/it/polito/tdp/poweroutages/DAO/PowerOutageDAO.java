@@ -13,6 +13,7 @@ import it.polito.tdp.poweroutages.model.PowerOutages;
 
 public class PowerOutageDAO {
 	
+	//restituisce tutti i nerc dal database
 	public List<Nerc> getNercList() {
 
 		String sql = "SELECT id, value FROM nerc";
@@ -37,7 +38,7 @@ public class PowerOutageDAO {
 		return nercList;
 	}
 
-	@SuppressWarnings("unused")
+	//restituisce tutti i power outages di un determinato nerc dal database
 	public List<PowerOutages> getPOList(Nerc N) {
 		
 		String sql = "SELECT date_event_began AS begin,date_event_finished AS finished,customers_affected AS customers\r\n"
@@ -63,6 +64,7 @@ public class PowerOutageDAO {
 				Timestamp f = res.getTimestamp("finished");
 				int c = res.getInt("customers");
 				
+				//inizialmente metto l'anno a 0, poi ci penserà il model
 				PowerOutages p = new PowerOutages(0,b,f,c);
 				
 				POList.add(p);

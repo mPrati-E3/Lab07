@@ -1,5 +1,6 @@
 package it.polito.tdp.poweroutages.model;
 
+//javabean per rappresentare i nerc
 public class Nerc {
 
 	

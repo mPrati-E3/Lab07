@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
-
+//classe dedicata ad effetuare la connessione al database tramite hikari
 
 /**
  * Utility class for connecting to the database
