@@ -1,7 +1,6 @@
 package it.polito.tdp.poweroutages.model;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import it.polito.tdp.poweroutages.DAO.PowerOutageDAO;
